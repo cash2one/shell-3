@@ -51,6 +51,9 @@ echo -e "问题页\t"`egrep -ac '^www.to8to.com.*/ask/k' real.log`
 echo -e "文章页\t"`egrep -ac '^www.to8to.com.*/yezhu/[zv][0-9]+.html' real.log`
 echo -e "图片页\t"`egrep -ac '^xiaoguotu.to8to.com.*/[cp][0-9]+.html' real.log`
 
+#抓取最多URL
+awk '{print $1$8}' real.log | sort | uniq -c | sort -nr | head -20
+
 #常见404 URL数量
 # printf "\n\n常见404数量:\n\n"
 # sltype=(

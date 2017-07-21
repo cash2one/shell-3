@@ -1,6 +1,6 @@
 #!/bin/bash
-#自主适配检查
 
+#自主适配检查
 TESTURL=(
 http://www.to8to.com/
 http://cq.to8to.com/
@@ -65,7 +65,7 @@ SP(){
 
 TESTURL=(
 http://xiaoguotu.to8to.com/list-h1s1i0
-http://xiaoguotu.to8to.com/search/34669
+http://xiaoguotu.to8to.com/search/86332
 http://www.to8to.com/ask/more-h2i5
 http://www.to8to.com/ask/search/4008
 http://www.to8to.com/yezhu/fangchan/
@@ -73,8 +73,7 @@ http://www.to8to.com/yezhu/list-h9s4
 http://www.to8to.com/baike/100002/
 )
 echo -e "\n\n\e[32;7m列表页内容对应检查\e[0m"
-echo -e 
-"\e[32;8m#列表页内容有时会因缓存问题导致两边不一致,正常\n\e[0m"
+echo -e "\e[32;8m#列表页内容有时会因缓存问题导致两边不一致,正常\n\e[0m"
 for i in ${TESTURL[@]}
 do
 if [[ $i =~ "xiaoguotu" ]]
@@ -93,7 +92,7 @@ then
 
 elif [[ $i =~ "yezhu" ]]
 then
-	curl -s $i | grep 'list-item-title' | sed -r 's/^\s+<div.*.html">(.*)<\/a><\/div>/\1/g' | sort >PC
+	curl -s $i | grep 'list-item-title' | sed -r 's/^\s+<div.*.html">(.*)<\/a><\/div>/\1/g' | sort | sed -r 's/\r//g'>PC
 	H5URL=`echo $i | sed 's/www/m/g'`
 	curl -s $H5URL | grep '<img alt=' | sed -r 's/^\s+<img alt="(.*)"\s+src=.*$/\1/g' | sort >H5
 	SP

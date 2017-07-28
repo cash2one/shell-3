@@ -1,5 +1,5 @@
 #!/bin/bash
-rm real.log to8to.log
+rm real.log to8to.log 2>/dev/null
 
 #判断是否指定了日志文件，如果没有则进行下载
 if [ ! $1 ]
@@ -52,6 +52,7 @@ echo -e "文章页\t"`egrep -ac '^www.to8to.com.*/yezhu/[zv][0-9]+.html' real.lo
 echo -e "图片页\t"`egrep -ac '^xiaoguotu.to8to.com.*/[cp][0-9]+.html' real.log`
 
 #抓取最多URL
+printf "\n\n抓取最多页面\n\n"
 awk '{print $1$8}' real.log | sort | uniq -c | sort -nr | head -20
 
 #常见404 URL数量
